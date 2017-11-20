@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HomeWork1</string>
+    <string name="haksic">학생식당</string>
+    <string name="text1">서울 성북구 삼선동2가 389</string>
+    <string name="text2">02-760-4499</string>
+    <string name="text3">오전 10시 30분 ~ 오후 7시</string>
+    <string name="menu">Roll &amp; Noodles 메뉴</string>
+    <string name="coldNoodles">냉모밀</string>
+    <string name="coldNoodlescost">3000</string>
+    <string name="naengmyeon">냉면</string>
+    <string name="naengmyeoncost">2500</string>
+    <string name="stew">돈육순두부찌개</string>
+    <string name="stewcost">3800</string>
+    <string name="gimbap">야채김밥</string>
+    <string name="gimbapcost">1200</string>
+    <string name="p1">평점:3.0</string>
+    <string name="p2">평점:3.5</string>
+    <string name="p3">평점:4.2</string>
+    <string name="p4">평점:4.0</string>
+</resources>
