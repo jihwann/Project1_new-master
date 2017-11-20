@@ -96,9 +96,9 @@ public class MainFragment extends Fragment {
                 getActivity(),
                 R.layout.list_item,
                 cursor2, new String[]{
-                //UserContract2.Users.KEY_MENU_NAME,
-                UserContract2.Users.KEY_MENU_PRICE,
-                UserContract2.Users.KEY_MENU_EXPLANATION},
+                UserContract2.Users.KEY_MENU_NAME,
+                UserContract2.Users.KEY_MENU_PRICE},
+                //UserContract2.Users.KEY_MENU_EXPLANATION},
                 new int[]{R.id.textView1, R.id.textView2},
                 0
         );
@@ -118,19 +118,21 @@ public class MainFragment extends Fragment {
                 //menu_explain.setText(((Cursor)adapter.getItem(i)).getString(2));
                 //textView1.setText(((Cursor)adapter.getItem(i)).getString(1));
                 //textView2.setText(((Cursor)adapter.getItem(i)).getString(2));
-                String a = ((Cursor)adapter.getItem(i)).getString(0);
+                //String a = ((Cursor)adapter.getItem(i)).getString(0);
                 String b = ((Cursor)adapter.getItem(i)).getString(1);
                 String c = ((Cursor)adapter.getItem(i)).getString(2);
 
                 Intent intent = new Intent();
-                intent.putExtra("title", a);
-                //intent.putExtra("price", a);
-                intent.putExtra("explain", a);
-                Log.v("test1", a);
+
+                intent.putExtra("title", i);
+
+                //intent.putExtra("price", b);
+                //intent.putExtra("explain", c);
+                //Log.v("test1", String.valueOf(i));
 
                 Activity activity = getActivity();
                 ((OnTitleSelectedListener)activity).onTitleSelected(i);
-                Log.v("test1", a);
+              //  Log.v("test1", c);
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
