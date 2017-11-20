@@ -13,8 +13,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -41,10 +43,20 @@ public class MainFragment extends Fragment {
     public DBHelper2 mDbHelper2;
 
     final int REQUEST_CODE_READ_CONTACTS = 1;
+
+    EditText menu_title;
+    EditText menu_price;
+    EditText menu_explain;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){ // 화면에 보일 뷰 만듬
 
-        View rootView = (View)inflater.inflate(R.layout.fragment_main, container, false);  // 뷰 객체 만들어줌
+        final View rootView = (View)inflater.inflate(R.layout.fragment_main, container, false);  // 뷰 객체 만들어줌
+
+        menu_title = (EditText)rootView.findViewById(R.id.menu_title);
+        menu_price = (EditText)rootView.findViewById(R.id.menu_price);
+        menu_explain = (EditText)rootView.findViewById(R.id.menu_explain);
+
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,14 +80,45 @@ public class MainFragment extends Fragment {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //메뉴 등록에서
 
+        mDbHelper2 = new DBHelper2(getActivity());
+        Cursor cursor2 = mDbHelper2.getAllUsersByMethod();
+
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getActivity(),
+                R.layout.list_item,
+                cursor2, new String[]{
+                //UserContract2.Users.KEY_MENU_NAME,
+                UserContract2.Users.KEY_MENU_PRICE,
+                UserContract2.Users.KEY_MENU_EXPLANATION},
+                new int[]{R.id.textView1, R.id.textView2},
+                0
+        );
+
+        ListView lv = (ListView)rootView.findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Adapter adapter = parent.getAdapter();
+
+                menu_title .setText(((Cursor)adapter.getItem(i)).getString(0));
+                menu_price.setText(((Cursor)adapter.getItem(i)).getString(1));
+                menu_explain.setText(((Cursor)adapter.getItem(i)).getString(2));
+
+            }
+        });
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        return rootView;
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        
 
 
+/*
         // 밑에 아이템 추가
         ListView lv = (ListView)rootView.findViewById(R.id.listview); // listview 객체를 레퍼런스함
 
@@ -90,7 +133,7 @@ public class MainFragment extends Fragment {
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         return rootView;
-
+*/
 
     }
 

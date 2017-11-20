@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnTitleSelectedListener{
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
