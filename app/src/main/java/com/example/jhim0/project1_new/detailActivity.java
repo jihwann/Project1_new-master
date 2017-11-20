@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by USER on 2017-10-03.
  */
@@ -17,10 +19,16 @@ public class detailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             finish();
             return;
         }
+
+
+
+
 
         detailFragment details = new detailFragment();
 

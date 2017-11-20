@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,18 @@ public class detailFragment  extends android.support.v4.app.Fragment {
         //inflate layout for this fragment
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
+
+
+        Intent intent = new Intent();
+
+        String name = intent.getStringExtra("title");
+        TextView tv1 = (TextView)view.findViewById(R.id.Text1);
+        tv1.setText(name);
+        Log.v("test",name);
+
+        String explain = intent.getStringExtra("explain");
+        TextView tv2 = (TextView)view.findViewById(R.id.Text2);
+        tv2.setText(explain);
 
         /*
         Intent intentimage = getIntent();

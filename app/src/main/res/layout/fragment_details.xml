@@ -13,13 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
-        android:text="test1"
         android:textSize="20dp"
         android:id="@+id/Text1"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test1"
         android:textColor="?android:attr/textColorLink"
         android:textSize="15dp"
         android:id="@+id/Text2"/>
@@ -27,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test1"
+        android:text="평점 : 0.0"
         android:textColor="@color/colorPrimary"
         android:textSize="17dp"
         android:id="@+id/Text3"/>

@@ -3,6 +3,7 @@ package com.example.jhim0.project1_new;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +69,11 @@ public class MainFragment extends Fragment {
         TextView txv3 = (TextView) rootView.findViewById(R.id.addTextView2);
         //ImageView imv1 = (ImageView) rootView.findViewById(R.id.imageView1);
 
+        //TextView img1 = (TextView) rootView.findViewById(R.id.imageView);
+        final TextView textView1 = (TextView) rootView.findViewById(R.id.textView1);
+        final TextView textView2 = (TextView) rootView.findViewById(R.id.textView2);
+
+
         Cursor cursor = mDbHelper.getAllUsersBySQL();
 
         while(cursor.moveToNext()){
@@ -99,15 +106,31 @@ public class MainFragment extends Fragment {
         ListView lv = (ListView)rootView.findViewById(R.id.listview);
         lv.setAdapter(adapter);
 
+
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Adapter adapter = parent.getAdapter();
 
-                menu_title .setText(((Cursor)adapter.getItem(i)).getString(0));
-                menu_price.setText(((Cursor)adapter.getItem(i)).getString(1));
-                menu_explain.setText(((Cursor)adapter.getItem(i)).getString(2));
+                //menu_title .setText(((Cursor)adapter.getItem(i)).getString(0));
+                //menu_price.setText(((Cursor)adapter.getItem(i)).getString(1));
+                //menu_explain.setText(((Cursor)adapter.getItem(i)).getString(2));
+                //textView1.setText(((Cursor)adapter.getItem(i)).getString(1));
+                //textView2.setText(((Cursor)adapter.getItem(i)).getString(2));
+                String a = ((Cursor)adapter.getItem(i)).getString(0);
+                String b = ((Cursor)adapter.getItem(i)).getString(1);
+                String c = ((Cursor)adapter.getItem(i)).getString(2);
 
+                Intent intent = new Intent();
+                intent.putExtra("title", a);
+                //intent.putExtra("price", a);
+                intent.putExtra("explain", a);
+                Log.v("test1", a);
+
+                Activity activity = getActivity();
+                ((OnTitleSelectedListener)activity).onTitleSelected(i);
+                Log.v("test1", a);
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -136,12 +159,6 @@ public class MainFragment extends Fragment {
 */
 
     }
-
-
-
-
-
-
 
 
 
