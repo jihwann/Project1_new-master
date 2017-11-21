@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class detailFragment  extends android.support.v4.app.Fragment {
 
         Intent intent = new Intent();
 
-        int select = intent.getIntExtra("title",0);
+        int select = intent.getIntExtra("title",index);
 
         df.moveToPosition(select);
 
@@ -49,34 +50,16 @@ public class detailFragment  extends android.support.v4.app.Fragment {
         TextView tv1 = (TextView)view.findViewById(R.id.Text1);
         tv1.setText(df.getString(1));
 
-        //String explain = intent.getStringExtra("explain");
         TextView tv2 = (TextView)view.findViewById(R.id.Text2);
         tv2.setText(df.getString(2));
 
+        ImageView img = (ImageView)view.findViewById(R.id.image1);
+        img.setImageURI(Uri.parse(df.getString(3)));
+
+        TextView tv3 = (TextView)view.findViewById(R.id.Text3);
+        tv3.setText(df.getString(4));
 
 
-        /*
-        Intent intentimage = getIntent();
-        int image = intentimage.getIntExtra("image", 0);
-        ImageView image1 = (ImageView)findViewById(R.id.Foodimage1);
-        image1.setImageResource(image);
-
-
-        Intent intentname = getIntent();
-        String Textname = intentname.getStringExtra("name");
-        TextView tv1 = (TextView)findViewById(R.id.FoodText1);
-        tv1.setText(Textname);
-
-        Intent intentcost = getIntent();
-        String Textcost = intentcost.getStringExtra("cost");
-        TextView tv2 = (TextView)findViewById(R.id.FoodText2);
-        tv2.setText(Textcost);
-
-        Intent intentlast = getIntent();
-        String Textlast = intentlast.getStringExtra("taste");
-        TextView tv3 = (TextView)findViewById(R.id.FoodText3);
-        tv3.setText(Textlast);
-          */
 
         return view;
     }

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,18 +22,35 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnTitleSelectedListener{
+    public DBHelper mDbHelper1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDbHelper1 = new DBHelper(this);
+
+        ImageButton pbtn = (ImageButton)findViewById(R.id.Phonebutton);
+
+        pbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Phoneaction(v);
+            }
+        });
+
+
     }
 
-
-
     public void Phoneaction(View v) {
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:02-760-4499"));
-        startActivity(intent);
+        Cursor cursors = mDbHelper1.getAllUsersBySQL();
+        cursors.moveToLast();
+        String tel = "tel: " + cursors.getString(3);
+        Log.v("tel", tel);
+        Intent intents = new Intent(Intent.ACTION_VIEW, Uri.parse(tel));
+        startActivity(intents);
     }
 
 

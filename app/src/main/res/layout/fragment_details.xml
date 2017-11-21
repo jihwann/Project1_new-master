@@ -7,7 +7,7 @@
     <ImageView
         android:src="@drawable/sandle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/image1"/>
     <TextView
         android:layout_width="wrap_content"
@@ -25,8 +25,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="평점 : 0.0"
-        android:textColor="@color/colorPrimary"
-        android:textSize="17dp"
+        android:textColor="?android:attr/textColorLink"
+        android:textSize="15dp"
         android:id="@+id/Text3"/>
+
 </LinearLayout>

@@ -33,13 +33,13 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     //데이터베이스에 정보삽입
-    public long insertUserByMethod(String name, String address, String phone ) {     //picture 스트링 말고
+    public long insertUserByMethod(String name, String address, String phone, String picture ) {     //picture 스트링 말고
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(UserContract.Users.KEY_NAME, name);
         values.put(UserContract.Users.KEY_ADDRESS, address);
         values.put(UserContract.Users.KEY_PHONE, phone);
-        //values.put(UserContract.Users.KEY_PICTURE, picture);
+        values.put(UserContract.Users.KEY_PICTURE, picture);
         return db.insert(UserContract.Users.TABLE_NAME,null,values);
     }
 

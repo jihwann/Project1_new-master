@@ -27,9 +27,6 @@ public class detailActivity extends AppCompatActivity {
         }
 
 
-
-
-
         detailFragment details = new detailFragment();
 
         details.setSelection(getIntent().getIntExtra("index",-1));

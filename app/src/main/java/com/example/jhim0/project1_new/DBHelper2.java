@@ -32,12 +32,13 @@ public class DBHelper2 extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertUserByMethod2(String menu_name, String menu_price, String menu_explanation) {     //picture 스트링 말고
+    public long insertUserByMethod2(String menu_name, String menu_price, String img, String menu_explanation) {     //picture 스트링 말고
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(UserContract2.Users.KEY_MENU_NAME, menu_name);
         values.put(UserContract2.Users.KEY_MENU_PRICE, menu_price);
+        values.put(UserContract2.Users.KEY_PICTURE, img);
         values.put(UserContract2.Users.KEY_MENU_EXPLANATION, menu_explanation);
 
         return db.insert(UserContract2.Users.TABLE_NAME2, null, values);

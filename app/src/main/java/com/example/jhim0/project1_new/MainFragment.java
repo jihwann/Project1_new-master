@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -67,20 +68,19 @@ public class MainFragment extends Fragment {
         TextView txv1 = (TextView) rootView.findViewById(R.id.mainTextView);
         TextView txv2 = (TextView) rootView.findViewById(R.id.addTextView1);
         TextView txv3 = (TextView) rootView.findViewById(R.id.addTextView2);
-        //ImageView imv1 = (ImageView) rootView.findViewById(R.id.imageView1);
-
-        //TextView img1 = (TextView) rootView.findViewById(R.id.imageView);
-        final TextView textView1 = (TextView) rootView.findViewById(R.id.textView1);
-        final TextView textView2 = (TextView) rootView.findViewById(R.id.textView2);
-
+        ImageView imv1 = (ImageView) rootView.findViewById(R.id.imageView1);
 
         Cursor cursor = mDbHelper.getAllUsersBySQL();
 
-        while(cursor.moveToNext()){
-            txv1.setText(cursor.getString(1));
-            txv2.setText(cursor.getString(2));
-            txv3.setText(cursor.getString(3));
-        }
+        cursor.moveToLast();
+
+        txv1.setText(cursor.getString(1));
+        txv2.setText(cursor.getString(2));
+        txv3.setText(cursor.getString(3));
+
+        Uri img = Uri.parse("file://"+cursor.getString(4));
+        imv1.setImageURI(img);
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -97,9 +97,10 @@ public class MainFragment extends Fragment {
                 R.layout.list_item,
                 cursor2, new String[]{
                 UserContract2.Users.KEY_MENU_NAME,
-                UserContract2.Users.KEY_MENU_PRICE},
-                //UserContract2.Users.KEY_MENU_EXPLANATION},
-                new int[]{R.id.textView1, R.id.textView2},
+                UserContract2.Users.KEY_MENU_PRICE,
+                UserContract2.Users.KEY_PICTURE,
+                UserContract2.Users.KEY_MENU_EXPLANATION},
+                new int[]{R.id.textView1, R.id.textView2, R.id.imageView},
                 0
         );
 
@@ -107,37 +108,26 @@ public class MainFragment extends Fragment {
         lv.setAdapter(adapter);
 
 
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Adapter adapter = parent.getAdapter();
 
-                //menu_title .setText(((Cursor)adapter.getItem(i)).getString(0));
-                //menu_price.setText(((Cursor)adapter.getItem(i)).getString(1));
-                //menu_explain.setText(((Cursor)adapter.getItem(i)).getString(2));
-                //textView1.setText(((Cursor)adapter.getItem(i)).getString(1));
-                //textView2.setText(((Cursor)adapter.getItem(i)).getString(2));
-                //String a = ((Cursor)adapter.getItem(i)).getString(0);
                 String b = ((Cursor)adapter.getItem(i)).getString(1);
                 String c = ((Cursor)adapter.getItem(i)).getString(2);
+
 
                 Intent intent = new Intent();
 
                 intent.putExtra("title", i);
 
-                //intent.putExtra("price", b);
-                //intent.putExtra("explain", c);
-                //Log.v("test1", String.valueOf(i));
-
                 Activity activity = getActivity();
                 ((OnTitleSelectedListener)activity).onTitleSelected(i);
-              //  Log.v("test1", c);
+
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         return rootView;
-
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,8 +151,6 @@ public class MainFragment extends Fragment {
 */
 
     }
-
-
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {

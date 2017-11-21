@@ -24,8 +24,9 @@ import java.util.Date;
 
 public class AddRestaurant extends AppCompatActivity{
 
-    public DBHelper mDBHelper;
 
+    public DBHelper mDBHelper;
+    String StoreImg;
     private File mPhotoFile =null;         // 사진 저장할 파일 이름
     private String mPhotoFileName = null; //* 사진 이름
     final int REQUEST_IMAGE_CAPTURE = 30;  //* 이미지 크기
@@ -71,7 +72,7 @@ public class AddRestaurant extends AppCompatActivity{
         EditText phone = (EditText) findViewById(R.id.callnumber);
         //ImageButton picture = (ImageButton) findViewById(R.id.imageButton);
 
-        long nOfRows = mDBHelper.insertUserByMethod(name.getText().toString(), address.getText().toString(), phone.getText().toString() );   //이미지 받아오는것 확인 / 수정!!!
+        long nOfRows = mDBHelper.insertUserByMethod(name.getText().toString(), address.getText().toString(), phone.getText().toString(), StoreImg  );   //이미지 받아오는것 확인 / 수정!!!
 
 
 
@@ -127,6 +128,7 @@ public class AddRestaurant extends AppCompatActivity{
             //1. 카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성
             mPhotoFileName = "IMG" + currentDateFormat() + ".jpg";
             mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+            StoreImg = mPhotoFile.getAbsolutePath();
 
             if (mPhotoFile != null) {
                 //2. 생성된 파일 객체에 대한 Uri 객체를 얻기
